@@ -11,4 +11,41 @@ public class Game {
         }
         return false;
     }
+
+    public static int countOfLose(int[] speedsOfPlayers) {
+        int count = 0;
+
+        for (int playerSpeed : speedsOfPlayers) {
+            if (playerSpeed > 0 && !isGreenLight) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int[] speedsOfLose(int[] speedsOfPlayers) {
+        int[] speeds = new int[countOfLose(speedsOfPlayers)];
+        int index = 0;
+
+        for (int playerSpeed : speedsOfPlayers) {
+            if (playerSpeed > 0 && !isGreenLight) {
+                speeds[index++] = playerSpeed;
+            }
+        }
+        return speeds;
+    }
+
+    public static int[] speedsOfWin(int[] speedsOfPlayers) {
+        int[] speeds = new int[speedsOfPlayers.length - countOfLose(speedsOfPlayers)];
+        int index = 0;
+
+        for (int playerSpeed : speedsOfPlayers) {
+            if ((playerSpeed == 0 && !isGreenLight) || isGreenLight) {
+                speeds[index++] = playerSpeed;
+            }
+        }
+        return speeds;
+    }
+
+
 }
